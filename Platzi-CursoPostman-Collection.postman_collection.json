@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "3ddef57c-b22c-454f-928e-443dc4a8fbaa",
+		"name": "Platzi-CursoPostman-Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "List Courses",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "811a9d03-d3fa-49cd-bb36-e2a861d18105",
+								"exec": [
+									"// Antes de mandar el request",
+									"// Guardar en el enviroment el dia de hoy",
+									"pm.environment.set(\"today\", new Date().toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "33d262c4-b1be-44f8-a428-5a3e1c29960b",
+								"exec": [
+									"// Despues de mandar el request"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{api_url}}/courses?begin_date={{today}}&page=1&page_size=1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"courses"
+							],
+							"query": [
+								{
+									"key": "begin_date",
+									"value": "{{today}}"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "page_size",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f9cf4cfc-3fb5-49ff-bca8-39111a7aa366",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "49138a3b-b028-482e-852e-e9869ee4b934",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Comment Creations",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b57f12cd-ee05-46b7-8eea-9e7acbee24ff",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "920f9306-2cad-48ee-a3cf-28e6ffe208eb",
+								"exec": [
+									"pm.test(\"Successful POST request\", function() {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202])",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"contenido\",\n    \"material\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/comments/",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"comments",
+								""
+							]
+						},
+						"description": "# This is the description for Comment Creation\n\nRequest:\n\n- `content`:`String` especify the content of a comment\n- `material`:`Int` especify the material"
+					},
+					"response": [
+						{
+							"name": "Comment Creations Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content\": \"contenido\",\n    \"material\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_url}}/comments/",
+									"host": [
+										"{{api_url}}"
+									],
+									"path": [
+										"comments",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 13 Nov 2020 18:45:50 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.6.12"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Content-Length",
+									"value": "139"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"content\": \"contenido\",\n    \"likes\": 0,\n    \"created_at\": \"2020-11-13T18:45:50.217162Z\",\n    \"updated_at\": \"2020-11-13T18:45:50.217211Z\",\n    \"material\": 1\n}"
+						},
+						{
+							"name": "Comment Creations Failed 400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_url}}/comments/",
+									"host": [
+										"{{api_url}}"
+									],
+									"path": [
+										"comments",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 13 Nov 2020 18:48:47 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.6.12"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        \"This field is required.\"\n    ],\n    \"material\": [\n        \"This field is required.\"\n    ]\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6da920d9-4a9d-42cd-9b7a-d7b580ad4181",
+						"exec": [
+							"// Despues del request",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response should be JSON\", function() {",
+							"    pm.response.json();",
+							"})",
+							"",
+							"pm.test(\"Response should contains token\", function(){",
+							"    pm.response.to.have.jsonBody(\"token\");",
+							"    pm.environment.unset(\"token\");",
+							"    const json = pm.response.json()",
+							"    pm.environment.set(\"token\", `Token ${json.token}`);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"superadmin\",\n    \"password\": \"ThisIs@SecurePassw0rd\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/api-token-auth/",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"api-token-auth",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
